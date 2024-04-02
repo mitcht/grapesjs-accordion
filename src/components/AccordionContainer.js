@@ -7,10 +7,8 @@ export default (dc, { defaultModel, defaultView, ...config }) => {
   const selectorAccordion = config.selectorAccordion;
 
   dc.addType(type, {
-    model: defaultModel.extend(
-      {
+    model: {
         defaults: {
-          ...defaultModel.prototype.defaults,
           name: "Accordion Container",
           draggable: `[${attrAccordions}, ${attrAccordionContent}]`,
           droppable: false,
@@ -45,15 +43,12 @@ export default (dc, { defaultModel, defaultView, ...config }) => {
             }
           }
         },
-      },
-      {
         isComponent(el) {
           if (el.hasAttribute && el.hasAttribute(attrKey)) {
             return { type };
           }
-        },
-      }
-    ),
+        }
+      },
 
     view: defaultView,
   });

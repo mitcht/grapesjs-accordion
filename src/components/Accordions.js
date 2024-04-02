@@ -3,10 +3,8 @@ export default (dc, { defaultModel, defaultView, ...config }) => {
   const attrAccordions = config.attrAccordions;
 
   dc.addType(type, {
-    model: defaultModel.extend(
-      {
+    model: {
         defaults: {
-          ...defaultModel.prototype.defaults,
           copyable: false,
           droppable: false,
           name: "Accordions",
@@ -99,23 +97,20 @@ export default (dc, { defaultModel, defaultView, ...config }) => {
           attrs[config.attrAccordions] = 1;
           this.setAttributes(attrs);
         },
-      },
-      {
         isComponent(el) {
           if (el.hasAttribute && el.hasAttribute(attrAccordions)) {
             return { type };
           }
         },
-      }
-    ),
+      },
 
-    view: defaultView.extend({
+    view: {
       init() {
         const comps = this.model.components();
         !comps.length && comps.add(config.template);
       },
 
       onRender() {},
-    }),
+    },
   });
 };
